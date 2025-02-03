@@ -1,0 +1,10 @@
+<your_domain_name> {
+    reverse_proxy dental-store:8000
+
+    log {
+        output stdout
+        format console
+    }
+
+    tls <your_email>
+}
