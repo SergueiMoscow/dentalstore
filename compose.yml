@@ -25,7 +25,6 @@ services:
     volumes:
       - .:/app
     environment:
-      DEBUG: '0'
       DATABASE_NAME: ${DB_NAME}
       DATABASE_USER: ${DB_USER}
       DATABASE_PASSWORD: ${DB_PASSWORD}

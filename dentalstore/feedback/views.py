@@ -7,6 +7,8 @@ from django.template.loader import render_to_string
 from django.views.generic import View
 from django.http import JsonResponse
 
+from ..dentalstore.settings import EMAIL_HOST_USER
+
 
 # class OrderCallBackFormView(View):
 #     def post(self, request):
@@ -39,7 +41,7 @@ class OrderCallBackFormView(View):
             form.save()
             html_body = render_to_string('app/application_main_page.html', data)
 
-            msg = EmailMultiAlternatives(subject='Новая заявка "Заказать звонок"', to=['store.onine1@gmail.com'])
+            msg = EmailMultiAlternatives(subject='Новая заявка "Заказать звонок"', to=[EMAIL_HOST_USER])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             return JsonResponse(data={'success': "Спасибо за заявку, наш сотрудник позвонит вам в ближайшее время"}, status=201)
@@ -81,7 +83,7 @@ class FeedBackFormView(View):
             form.save()
             html_body = render_to_string('app/application_contacts_page.html', data)
 
-            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=['store.onine1@gmail.com'])
+            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=[EMAIL_HOST_USER])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             return JsonResponse(data={'success': "Спасибо за заявку, наш сотрудник позвонит вам в ближайшее время"}, status=201)

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 
 from .forms import OrderCreateForm
 from .models import OrderItem
+from ..dentalstore import settings
 
 
 # Create your views here.
@@ -35,7 +36,7 @@ def order_create(request, html_body=None):
                                                                    'address': address,
                                                                    'order': order,
                                                                    'cart': cart})
-            msg = EmailMultiAlternatives(subject='Новый заказ', to=['store.onine1@gmail.com'])
+            msg = EmailMultiAlternatives(subject='Новый заказ', to=[settings.EMAIL_HOST_USER])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             # clear the cart
