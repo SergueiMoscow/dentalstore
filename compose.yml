@@ -22,7 +22,7 @@ services:
     command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
-      - static_data:/app/dentalstore/staticfiles
+      - static_data:/app/dentalstore/dentalstore/static
     environment:
       DATABASE_NAME: ${DB_NAME}
       DATABASE_USER: ${DB_USER}
