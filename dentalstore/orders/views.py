@@ -35,7 +35,7 @@ def order_create(request, html_body=None):
                                                                    'address': address,
                                                                    'order': order,
                                                                    'cart': cart})
-            msg = EmailMultiAlternatives(subject='Новый заказ', to=['store.onine1@gmail.com'])
+            msg = EmailMultiAlternatives(subject='Новый заказ', to=['dentalstore.pro@gmail.com'])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             # clear the cart
