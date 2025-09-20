@@ -19,8 +19,8 @@ services:
     build: .
     container_name: dental-store-app
     restart: unless-stopped
-#    command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py runserver 0.0.0.0:8000"
-    command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 dentalstore.dentalstore.wsgi:application"
+    command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py collectstatic --noinput && python dentalstore/manage.py runserver 0.0.0.0:8000"
+#    command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py collectstatic --noinput && gunicorn --bind 0.0.0.0:8000 dentalstore.dentalstore.wsgi:application"
 
     volumes:
       - .:/app
