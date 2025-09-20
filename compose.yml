@@ -73,3 +73,4 @@ volumes:
   caddy_data:
   caddy_config:
   portainer_data:
+  static_data:
