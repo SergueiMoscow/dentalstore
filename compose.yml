@@ -22,7 +22,6 @@ services:
     command: sh -c "python dentalstore/manage.py migrate && python dentalstore/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
-      - static_data:/home/admin/dentalstore/dentalstore/static
     environment:
       DATABASE_NAME: ${DB_NAME}
       DATABASE_USER: ${DB_USER}
@@ -47,7 +46,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - static_data:/static
+      - ./dentalstore/static:/static
     depends_on:
       - dental-store
     networks:
@@ -73,4 +72,3 @@ volumes:
   caddy_data:
   caddy_config:
   portainer_data:
-  static_data:
