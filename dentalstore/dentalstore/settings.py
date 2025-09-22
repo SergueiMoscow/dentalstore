@@ -28,8 +28,8 @@ FAVORITES_SESSION_ID = 'favorites'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = (os.getenv('DEBUG', 'False') == 'True')
-DEBUG = 'False'
+DEBUG = (os.getenv('DEBUG', 'False') == 'True')
+# DEBUG = 'False'
 
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
@@ -238,14 +238,15 @@ else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = 'store.onine1@gmail.com'
+    EMAIL_HOST_USER = os.getenv('EMAIL')
     EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
     EMAIL_USE_TLS = True
 
 TAGGIT_CASE_INSENSITIVE = True
 
 REST_FRAMEWORK = {
-     'PAGE_SIZE': 12,
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 12,
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',

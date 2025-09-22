@@ -1,0 +1,31 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+packages:
+ - sudo
+ - curl
+ - git
+ - ca-certificates
+ - python3.11
+ - python3.11-venv
+ - python3.11-dev
+
+users:
+ - name: admin
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   groups: sudo, docker
+   shell: /bin/bash
+   lock_passwd: false
+   passwd: "$6$EFOMZg8yuMMFHQV8$geCsvLs3Z6Fy2LaFrMfEnAt0QhnY.3BRA807Rp24aB1gVjQGILjm0phYSiuCGmUOhSA5d.hiLlkgR6dVPHAXx1"
+
+runcmd:
+ - curl -fsSL https://get.docker.com -o get-docker.sh
+ - sudo sh get-docker.sh
+ - sudo usermod -aG docker admin
+
+final_message: "Инициализация сервера завершена."
+# Лог cloud-init:
+# /var/log/cloud-init-output.log
+# Генерация пароля:
+# openssl passwd -6 "НадёжныйПароль"
