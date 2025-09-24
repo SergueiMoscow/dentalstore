@@ -1,4 +1,6 @@
-from django.conf import settings
+# from django.conf import settings
+import os
+
 from django.contrib import messages
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import render, redirect, HttpResponseRedirect
@@ -6,6 +8,10 @@ from .forms import OrderCallBackForm, FeedBackForm
 from django.template.loader import render_to_string
 from django.views.generic import View
 from django.http import JsonResponse
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+EMAIL = os.getenv('EMAIL')
 
 
 # class OrderCallBackFormView(View):
@@ -39,7 +45,7 @@ class OrderCallBackFormView(View):
             form.save()
             html_body = render_to_string('app/application_main_page.html', data)
 
-            msg = EmailMultiAlternatives(subject='Новая заявка "Заказать звонок"', to=['dentalstore.pro@gmail.com'])
+            msg = EmailMultiAlternatives(subject='Новая заявка "Заказать звонок"', to=[EMAIL])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             return JsonResponse(data={'success': "Спасибо за заявку, наш сотрудник позвонит вам в ближайшее время"}, status=201)
@@ -81,7 +87,7 @@ class FeedBackFormView(View):
             form.save()
             html_body = render_to_string('app/application_contacts_page.html', data)
 
-            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=[EMAIL_HOST_USER])
+            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=[''])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             return JsonResponse(data={'success': "Спасибо за заявку, наш сотрудник позвонит вам в ближайшее время"}, status=201)
