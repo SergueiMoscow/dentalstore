@@ -87,7 +87,7 @@ class FeedBackFormView(View):
             form.save()
             html_body = render_to_string('app/application_contacts_page.html', data)
 
-            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=[''])
+            msg = EmailMultiAlternatives(subject='Новая заявка "Пользователь написал сообщение"', to=[EMAIL])
             msg.attach_alternative(html_body, 'text/html')
             msg.send()
             return JsonResponse(data={'success': "Спасибо за заявку, наш сотрудник позвонит вам в ближайшее время"}, status=201)
