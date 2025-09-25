@@ -49,6 +49,7 @@ services:
       - caddy_config:/config
       - ./Caddyfile:/etc/caddy/Caddyfile
       - ./dentalstore/static:/static
+      - ./dentalstore/media:/media
     depends_on:
       - dental-store
     networks:

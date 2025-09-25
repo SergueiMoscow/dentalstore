@@ -1,4 +1,17 @@
-<your_domain_name> {
+<your_domain> {
+    # Обслуживание статических файлов из директории
+    handle_path /static/* {
+        root * /static
+        file_server
+    }
+
+    # Обслуживание media файлов из директории
+    handle_path /media/* {
+        root * /media
+        file_server
+    }
+
+    # Проксирование остальных запросов в Django
     reverse_proxy dental-store:8000
 
     log {
